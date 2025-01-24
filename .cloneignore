@@ -1,1 +1,8 @@
 *.txt
+*.o
+*.a
+*.out
+*.pdf
+maps
+assets
+minilibx-linux
