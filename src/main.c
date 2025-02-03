@@ -6,7 +6,7 @@
 /*   By: vide-sou <vide-sou@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 08:02:47 by vide-sou          #+#    #+#             */
-/*   Updated: 2025/02/01 12:39:17 by vide-sou         ###   ########.fr       */
+/*   Updated: 2025/02/03 09:50:58 by vide-sou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,8 @@ int	main(int ac, char **av)
 	get_all_map(av[1], &season);
 	season.screen_x = WIDTH;
 	season.screen_y = HEIGHT;
-	season.per_pixel = (HEIGHT / 6) / (season.column - 1); 
+	season.per_pixel = (WIDTH / season.column) / 2; 
 	ft_draw_map(&data, &season);
-
-	//test_ft_draw_line(&data, 50, 50, 100, 30, 0xFFFFFF);
-
 	mlx_put_image_to_window(mlx, mlx_win, data.img, 0, 0);
 	mlx_loop(mlx);
 }

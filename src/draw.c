@@ -6,7 +6,7 @@
 /*   By: vide-sou <vide-sou@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 08:36:00 by vide-sou          #+#    #+#             */
-/*   Updated: 2025/02/01 10:55:04 by vide-sou         ###   ########.fr       */
+/*   Updated: 2025/02/03 09:58:54 by vide-sou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ static int  ft_create_color(int hex_ini, int hex_end, int step, int index)
     r = ((((hex_ini >> 16) & 0xFF) - ((hex_end >> 16) & 0xFF))) / step;
     g = (((hex_ini >> 8) & 0xFF) - ((hex_end >> 8) & 0xFF)) / step;
     b = ((hex_ini & 0xFF) - (hex_end & 0xFF)) / step;
-    r = ((hex_ini >> 16) & 0xFF) + (r * index);
-    g = ((hex_ini >> 8) & 0xFF) + (g * index);
-    b = (hex_ini & 0xFF) + (b * index);
-    return((abs(r) << 16) + (abs(g) << 8) + abs(b));
+    r = ((hex_ini >> 16) & 0xFF) - (r * index);
+    g = ((hex_ini >> 8) & 0xFF) - (g * index);
+    b = (hex_ini & 0xFF) - (b * index);
+    return(((int)r << 16) + ((int)g << 8) + (int)b);
 }
 
 void	ft_draw_pixel(t_data *data, int x, int y, int color)

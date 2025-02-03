@@ -6,7 +6,7 @@
 /*   By: vide-sou <vide-sou@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 08:36:13 by vide-sou          #+#    #+#             */
-/*   Updated: 2025/02/01 12:15:11 by vide-sou         ###   ########.fr       */
+/*   Updated: 2025/02/03 08:52:33 by vide-sou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 # define boolean int
 # define false 0
 # define true 1
-# define WIDTH 600
-# define HEIGHT 600
+# define WIDTH 1000
+# define HEIGHT 1000
 
 # include "../minilibx-linux/mlx.h"
 # include "../gnl/get_next_line.h"
@@ -64,5 +64,6 @@ void	get_all_map(char *path, t_season *season);
 int		ft_htoi(char *value);
 char	*ft_join_with_space(char *s1, char *s2);
 void    ft_draw_map(t_data *data, t_season *season);
+t_pixel_source *ft_distort_pixel(int x, int y, t_season *season);
 
 #endif

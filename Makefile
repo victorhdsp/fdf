@@ -1,5 +1,5 @@
 NAME= fdf
-FILES= ./src/main.o ./src/draw.o ./src/map.o ./src/utils.o ./src/season.o ./gnl/get_next_line_utils.o ./gnl/get_next_line.o
+FILES= ./src/main.o ./src/draw.o ./src/map.o ./src/utils.o ./src/season.o ./src/distort.o ./gnl/get_next_line_utils.o ./gnl/get_next_line.o
 CC=cc -Wall -Wextra -I ./$(MINILIBX) -ggdb
 FLAG_EXEC=-Lmlx_linux -lmlx_Linux -L./$(MINILIBX) -Imlx_linux -lXext -lX11 -lm -lz
 FLAG_OBJ=-Imlx_linux -O3
@@ -34,5 +34,6 @@ fclean: clean
 	rm -f $(NAME)
 	rm -rf $(MINILIBX)
 	rm -rf $(LIBFT)
+	rm -rf $(GNL)
 
 re: clean all
