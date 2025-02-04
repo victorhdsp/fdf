@@ -6,7 +6,7 @@
 /*   By: vide-sou <vide-sou@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 08:36:00 by vide-sou          #+#    #+#             */
-/*   Updated: 2025/02/03 17:39:42 by vide-sou         ###   ########.fr       */
+/*   Updated: 2025/02/04 18:19:00 by vide-sou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,17 @@ static int	ft_create_color(int hex_ini, int hex_end, int step, int index)
 	return (((int)r << 16) + ((int)g << 8) + (int)b);
 }
 
-void	ft_draw_pixel(t_data *data, int x, int y, int color)
+void	ft_draw_pixel(t_section *section, int x, int y, int color)
 {
 	char	*dst;
 
-	if (x < 0 || y < 0 || x > WIDTH || y > HEIGHT)
+	if (x < 0 || y < 0 || x > section->width || y > section->height)
 		return ;
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	dst = section->data->addr + (y * section->data->line_length + x * (section->data->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }
 
-void	ft_draw_line(t_data *data, t_pixel_source *px_ini,
+void	ft_draw_line(t_section *section, t_pixel_source *px_ini,
 		t_pixel_source *px_end)
 {
 	double	delta_x;
@@ -69,7 +69,7 @@ void	ft_draw_line(t_data *data, t_pixel_source *px_ini,
 	while (index < step)
 	{
 		color = ft_create_color(px_ini->color, px_end->color, step, index);
-		ft_draw_pixel(data, px_ini->x, px_ini->y, color);
+		ft_draw_pixel(section, px_ini->x, px_ini->y, color);
 		px_ini->x += delta_x;
 		px_ini->y += delta_y;
 		index++;

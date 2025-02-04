@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   season.c                                           :+:      :+:    :+:   */
+/*   section.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vide-sou <vide-sou@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,30 +12,30 @@
 
 #include "fdf.h"
 
-static void	ft_draw_chuck(t_data *data, t_season *season, int x, int y)
+static void	ft_draw_chuck(t_section *section, int x, int y)
 {
 	t_pixel_source	*px1;
 	t_pixel_source	*px2;
 
 	if (x > 0)
 	{
-		px1 = ft_distort_pixel((x - 1), y, season);
-		px2 = ft_distort_pixel(x, y, season);
-		ft_draw_line(data, px1, px2);
+		px1 = ft_distort_pixel((x - 1), y, section);
+		px2 = ft_distort_pixel(x, y, section);
+		ft_draw_line(section, px1, px2);
 		free(px1);
 		free(px2);
 	}
 	if (y > 0)
 	{
-		px1 = ft_distort_pixel(x, (y - 1), season);
-		px2 = ft_distort_pixel(x, y, season);
-		ft_draw_line(data, px1, px2);
+		px1 = ft_distort_pixel(x, (y - 1), section);
+		px2 = ft_distort_pixel(x, y, section);
+		ft_draw_line(section, px1, px2);
 		free(px1);
 		free(px2);
 	}
 }
 
-void	ft_draw_map(t_data *data, t_season *season)
+void	ft_draw_map(t_section *section)
 {
 	int	x;
 	int	y;
@@ -44,16 +44,16 @@ void	ft_draw_map(t_data *data, t_season *season)
 	x = 0;
 	y = 0;
 	index = 0;
-	while (index != (season->column + 1) * season->row)
+	while (index != (section->column + 1) * section->row)
 	{
-		if (season->map[index].skip == FALSE)
-			ft_draw_chuck(data, season, x, y);
+		if (section->map[index].skip == FALSE)
+			ft_draw_chuck(section, x, y);
 		else
 		{
 			y++;
 			x = -1;
 		}
 		x++;
-		index = x + (y * (season->column + 1));
+		index = x + (y * (section->column + 1));
 	}
 }

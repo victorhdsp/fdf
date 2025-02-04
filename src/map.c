@@ -6,7 +6,7 @@
 /*   By: vide-sou <vide-sou@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 09:44:30 by vide-sou          #+#    #+#             */
-/*   Updated: 2025/02/04 08:55:07 by vide-sou         ###   ########.fr       */
+/*   Updated: 2025/02/04 17:59:57 by vide-sou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static char	*get_all_map_string(char *path)
 	return (result);
 }
 
-t_map_position	get_map_item(char *item)
+static t_map_position	get_map_item(char *item)
 {
 	t_map_position	map;
 	char			*color;
@@ -66,7 +66,7 @@ static void	ft_clear_splited_map(char **arr)
 	free(arr);
 }
 
-static void	ft_split_space_map(char *string_map, t_season *season,
+static void	ft_split_space_map(char *string_map, t_section *section,
 		int map_index)
 {
 	char	**splited_by_space;
@@ -76,14 +76,14 @@ static void	ft_split_space_map(char *string_map, t_season *season,
 	splited_by_space = ft_split(string_map, ' ');
 	while (splited_by_space[index])
 	{
-		season->map[map_index + index] = get_map_item(splited_by_space[index]);
+		section->map[map_index + index] = get_map_item(splited_by_space[index]);
 		index++;
 	}
-	season->column = index;
+	section->column = index;
 	ft_clear_splited_map(splited_by_space);
 }
 
-void	get_all_map(char *path, t_season *season)
+void	get_all_map(char *path, t_section *section)
 {
 	char	*string_map;
 	int		index;
@@ -94,16 +94,16 @@ void	get_all_map(char *path, t_season *season)
 	splited_by_break = ft_split(string_map, '\n');
 	while (splited_by_break[index])
 		index++;
-	season->map = ft_calloc((index + 1) * index, sizeof(t_map_position));
-	season->row = index;
+	section->map = ft_calloc((index + 1) * index, sizeof(t_map_position));
+	section->row = index;
 	index = 0;
 	while (splited_by_break[index])
 	{
-		ft_split_space_map(splited_by_break[index], season, (season->column + 1)
+		ft_split_space_map(splited_by_break[index], section, (section->column + 1)
 			* index);
 		index++;
-		season->map[((season->column + 1) * index) - 1] = get_map_item("\n");
+		section->map[((section->column + 1) * index) - 1] = get_map_item("\n");
 	}
-	ft_clear_splited_map(splited_by_break);
-	free(string_map);
+	//ft_clear_splited_map(splited_by_break);
+	//free(string_map);
 }

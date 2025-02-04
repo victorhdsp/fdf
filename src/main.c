@@ -6,37 +6,60 @@
 /*   By: vide-sou <vide-sou@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 08:02:47 by vide-sou          #+#    #+#             */
-/*   Updated: 2025/02/04 08:54:21 by vide-sou         ###   ########.fr       */
+/*   Updated: 2025/02/04 18:09:56 by vide-sou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	print_screen(void *mlx, void *mlx_win, t_data *data, t_season *season)
+void	print_screen(t_section *section)
 {
-	ft_draw_map(data, season);
-	mlx_put_image_to_window(mlx, mlx_win, (*data).img, 0, 0);
-	mlx_loop(mlx);
+	ft_draw_map(section);
+	mlx_put_image_to_window(section->mlx, section->win, section->data->img, 0, 0);
+}
+
+void	clear_screen(t_section	section)
+{
+	int	index_x;
+	int	index_y;
+
+	index_x = 0;
+	index_y = 0;
+	while (index_x <= section.width)
+	{
+		while (index_y <= section.height)
+		{
+			ft_draw_pixel(&section, index_x, index_y, 0x000000);
+			index_y++;
+		}
+		index_y = 0;
+		index_x++;
+	}
+	mlx_put_image_to_window(section.mlx, section.win, section.data->img, 0, 0);
 }
 
 int	main(int ac, char **av)
 {
-	void		*mlx;
-	void		*mlx_win;
+	t_section	section;
 	t_data		data;
-	t_season	season;
 
 	if (ac != 2)
 		exit(-1);
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, WIDTH, HEIGHT, "Hello world!");
-	data.img = mlx_new_image(mlx, WIDTH, HEIGHT);
+	section.mlx = mlx_init();
+	section.width = WIDTH;
+	section.height = HEIGHT;
+	mlx_get_screen_size(section.mlx, &section.width, &section.height);
+	section.win = mlx_new_window(section.mlx, section.width, section.height, "FDF");
+	data.img = mlx_new_image(section.mlx, section.width, section.height);
 	data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel,
 			&data.line_length, &data.endian);
-	season.diff_x = 0;
-	season.diff_y = 0;
-	season.zoom = 1;
-	get_all_map(av[1], &season);
-	season.per_pixel = ((WIDTH / season.column) / 2);
-	print_screen(mlx, mlx_win, &data, &season);
+	section.data = &data;
+	section.diff_x = 0;
+	section.diff_y = 0;
+	section.zoom = 1;
+	get_all_map(av[1], &section);
+	section.per_pixel = ((section.width / section.column) / 2);
+	print_screen(&section);
+	mlx_hook(section.win, 17, 0, ft_close, &section);
+	mlx_loop(section.mlx);
 }

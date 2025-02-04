@@ -12,6 +12,8 @@
         "ranges": "c",
         "span": "c",
         "utility": "c",
-        "*.tcc": "c"
+        "*.tcc": "c",
+        "get_next_line.h": "c",
+        "string": "c"
     }
 }

@@ -6,7 +6,7 @@
 /*   By: vide-sou <vide-sou@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 08:36:13 by vide-sou          #+#    #+#             */
-/*   Updated: 2025/02/04 08:58:06 by vide-sou         ###   ########.fr       */
+/*   Updated: 2025/02/04 18:08:41 by vide-sou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,13 @@ typedef struct s_map_position
 	BOOLEAN			skip;
 }					t_map_position;
 
-typedef struct s_season
+typedef struct s_section
 {
+	void			*mlx;
+	void			*win;
+	t_data			*data;
+	int				width;
+	int				height;
 	double			per_pixel;
 	int				column;
 	int				row;
@@ -59,18 +64,19 @@ typedef struct s_season
 	int				diff_x;
 	int				diff_y;
 	t_map_position	*map;
-}					t_season;
+}					t_section;
 
-void				ft_draw_pixel(t_data *data, int x, int y, int color);
+void				ft_draw_pixel(t_section *section, int x, int y, int color);
 t_pixel_source		*ft_create_pixel_source(int x, int y, int color);
-void				ft_draw_line(t_data *data, t_pixel_source *px1,
+void				ft_draw_line(t_section *section, t_pixel_source *px1,
 						t_pixel_source *px2);
-void				get_all_map(char *path, t_season *season);
+void				get_all_map(char *path, t_section *section);
 int					ft_htoi(char *value);
 char				*ft_join_with_space(char *s1, char *s2);
-void				ft_draw_map(t_data *data, t_season *season);
-t_pixel_source		*ft_distort_pixel(int x, int y, t_season *season);
-void				print_screen(void *mlx, void *mlx_win, t_data *data,
-						t_season *season);
+void				ft_draw_map(t_section *section);
+t_pixel_source		*ft_distort_pixel(int x, int y, t_section *section);
+void				print_screen(t_section *section);
+void				clear_screen(t_section	section);
+int					ft_close(int keycode, t_section *section);
 
 #endif
