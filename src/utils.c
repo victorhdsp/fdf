@@ -12,26 +12,26 @@
 
 #include "fdf.h"
 
-int ft_htoi(char *value)
+int	ft_htoi(char *value)
 {
-    static char hex[16] = "0123456789ABCDEF";
-    int         count;
-    int         index;
-    int         result;
+	static char	hex[16] = "0123456789ABCDEF";
+	int			count;
+	int			index;
+	int			result;
 
-    index = 0;
-    count = 0;
-    result = 0;
-    while (value && value[count])
-    {
-        while (hex[index] && value[count] != hex[index])
-            index++;
-        if (value[count] == hex[index])
-            result = (result * 16) + index;
-        count++;
-        index = 0;
-    }
-    return (result);
+	index = 0;
+	count = 0;
+	result = 0;
+	while (value && value[count])
+	{
+		while (hex[index] && value[count] != hex[index])
+			index++;
+		if (value[count] == hex[index])
+			result = (result * 16) + index;
+		count++;
+		index = 0;
+	}
+	return (result);
 }
 
 char	*ft_join_with_space(char *s1, char *s2)
