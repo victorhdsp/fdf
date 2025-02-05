@@ -6,20 +6,19 @@
 /*   By: vide-sou <vide-sou@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 08:36:00 by vide-sou          #+#    #+#             */
-/*   Updated: 2025/02/04 18:19:00 by vide-sou         ###   ########.fr       */
+/*   Updated: 2025/02/05 17:34:49 by vide-sou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_pixel_source	*ft_create_pixel_source(int x, int y, int color)
+t_pixel_source	ft_create_pixel_source(int x, int y, int color)
 {
-	t_pixel_source	*s_pixel;
+	t_pixel_source	s_pixel;
 
-	s_pixel = malloc(1 * sizeof(t_pixel_source));
-	s_pixel->x = x;
-	s_pixel->y = y;
-	s_pixel->color = color;
+	s_pixel.x = x;
+	s_pixel.y = y;
+	s_pixel.color = color;
 	return (s_pixel);
 }
 
@@ -44,7 +43,8 @@ void	ft_draw_pixel(t_section *section, int x, int y, int color)
 
 	if (x < 0 || y < 0 || x > section->width || y > section->height)
 		return ;
-	dst = section->data->addr + (y * section->data->line_length + x * (section->data->bits_per_pixel / 8));
+	dst = section->data->addr + (y * section->data->line_length + x
+			* (section->data->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }
 

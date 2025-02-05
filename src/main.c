@@ -6,13 +6,13 @@
 /*   By: vide-sou <vide-sou@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 08:02:47 by vide-sou          #+#    #+#             */
-/*   Updated: 2025/02/05 16:51:07 by vide-sou         ###   ########.fr       */
+/*   Updated: 2025/02/05 19:26:21 by vide-sou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	clear_screen(t_section	*section)
+void	clear_screen(t_section *section)
 {
 	int	index_x;
 	int	index_y;
@@ -29,14 +29,16 @@ void	clear_screen(t_section	*section)
 		index_y = 0;
 		index_x++;
 	}
-	mlx_put_image_to_window(section->mlx, section->win, section->data->img, 0, 0);
+	mlx_put_image_to_window(section->mlx, section->win, section->data->img, 0,
+		0);
 }
 
 void	print_screen(t_section *section)
 {
 	clear_screen(section);
 	ft_draw_map(section);
-	mlx_put_image_to_window(section->mlx, section->win, section->data->img, 0, 0);
+	mlx_put_image_to_window(section->mlx, section->win, section->data->img, 0,
+		0);
 }
 
 static int	ft_close(t_section *section)
@@ -45,6 +47,7 @@ static int	ft_close(t_section *section)
 	mlx_destroy_window(section->mlx, section->win);
 	mlx_destroy_display(section->mlx);
 	free(section->map);
+	free(section->mlx);
 	exit(0);
 }
 
@@ -58,8 +61,11 @@ int	main(int ac, char **av)
 	section.mlx = mlx_init();
 	section.width = WIDTH;
 	section.height = HEIGHT;
+	section.column = 0;
+	section.row = 0;
 	mlx_get_screen_size(section.mlx, &section.width, &section.height);
-	section.win = mlx_new_window(section.mlx, section.width, section.height, "FDF");
+	section.win = mlx_new_window(section.mlx, section.width, section.height,
+			"fdf");
 	data.img = mlx_new_image(section.mlx, section.width, section.height);
 	data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel,
 			&data.line_length, &data.endian);
