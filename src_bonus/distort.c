@@ -6,7 +6,7 @@
 /*   By: vide-sou <vide-sou@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 08:36:00 by vide-sou          #+#    #+#             */
-/*   Updated: 2025/02/05 16:46:26 by vide-sou         ###   ########.fr       */
+/*   Updated: 2025/02/05 10:02:09 by vide-sou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 double	ft_per_pixel(double value, t_section *section)
 {
-	return (value * section->per_pixel);
+	return (value * section->per_pixel * section->zoom);
 }
 
 void	ft_centralize(double *x, double *y, double z, t_section *section)
@@ -24,8 +24,8 @@ void	ft_centralize(double *x, double *y, double z, t_section *section)
 
 	div_x = ((section->column - section->row) * cos(0.523599));
 	div_y = ((section->column + section->row) * sin(0.523599) - z);
-	*x = (section->width / 2) - ((ft_per_pixel(div_x, section)) / 2);
-	*y = (section->height / 2) - (ft_per_pixel(div_y, section) / 2);
+	*x = (section->width / 2) - ((ft_per_pixel(div_x, section)) / 2) + section->diff_x;
+	*y = (section->height / 2) - (ft_per_pixel(div_y, section) / 2) + section->diff_y;
 }
 
 t_pixel_source	*ft_distort_pixel(int x, int y, t_section *section)

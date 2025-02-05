@@ -6,7 +6,7 @@
 /*   By: vide-sou <vide-sou@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 08:36:13 by vide-sou          #+#    #+#             */
-/*   Updated: 2025/02/05 16:46:05 by vide-sou         ###   ########.fr       */
+/*   Updated: 2025/02/05 09:53:37 by vide-sou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,11 @@ typedef struct s_section
 	double			per_pixel;
 	int				column;
 	int				row;
+	double			zoom;
+	int				diff_x;
+	int				diff_y;
+	int				hold_x;
+	int				hold_y;
 	t_map_position	*map;
 }					t_section;
 
@@ -74,5 +79,12 @@ void				ft_draw_map(t_section *section);
 t_pixel_source		*ft_distort_pixel(int x, int y, t_section *section);
 void				print_screen(t_section *section);
 void				clear_screen(t_section	*section);
+int					ft_close(t_section *section);
+int					ft_down_pan(int button, int x, int y, t_section *section);
+int					ft_move_pan(int x, int y, t_section *section);
+int					ft_up_pan(int button, int x, int y, t_section *section);
+int					ft_mouse_action(int keycode, int x, int y, t_section *section);
+int					ft_mouse_up(int button, int x, int y, t_section *section);
+int					ft_mouse_move(int x, int y, t_section *section);
 
 #endif

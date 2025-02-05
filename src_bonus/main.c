@@ -6,7 +6,7 @@
 /*   By: vide-sou <vide-sou@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 08:02:47 by vide-sou          #+#    #+#             */
-/*   Updated: 2025/02/05 16:51:07 by vide-sou         ###   ########.fr       */
+/*   Updated: 2025/02/05 09:58:03 by vide-sou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,14 @@ void	print_screen(t_section *section)
 	mlx_put_image_to_window(section->mlx, section->win, section->data->img, 0, 0);
 }
 
-static int	ft_close(t_section *section)
+void	ft_hooks(t_section *section)
 {
-	mlx_destroy_image(section->mlx, section->data->img);
-	mlx_destroy_window(section->mlx, section->win);
-	mlx_destroy_display(section->mlx);
-	free(section->map);
-	exit(0);
+	mlx_hook(section->win, 17, 0, ft_close, section);
+	//mlx_mouse_hook(section->win, ft_mouse_events, section);
+	mlx_hook(section->win, 4, 1L<<2, ft_mouse_action, section);
+	mlx_hook(section->win, 5, 1L<<3, ft_mouse_up, section);
+	mlx_hook(section->win, 6, 1L<<6, ft_mouse_move, section);
+
 }
 
 int	main(int ac, char **av)
@@ -64,9 +65,14 @@ int	main(int ac, char **av)
 	data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel,
 			&data.line_length, &data.endian);
 	section.data = &data;
+	section.hold_x = -1;
+	section.hold_y = -1;
+	section.diff_x = 0;
+	section.diff_y = 0;
+	section.zoom = 1;
 	get_all_map(av[1], &section);
 	section.per_pixel = ((section.width / section.column) / 2);
 	print_screen(&section);
-	mlx_hook(section.win, 17, 0, ft_close, &section);
+	ft_hooks(&section);
 	mlx_loop(section.mlx);
 }
