@@ -1,16 +1,14 @@
 NAME= fdf
 EXTRA= ./gnl/get_next_line_utils.o ./gnl/get_next_line.o
 FILES= ./src/main.o ./src/draw.o ./src/map.o ./src/utils.o ./src/section.o ./src/distort.o $(EXTRA)
-BONUS_FILES= ./src_bonus/main.o ./src_bonus/draw.o ./src_bonus/map.o ./src_bonus/utils.o ./src_bonus/section.o ./src_bonus/distort.o ./src_bonus/mouse_events.o ./src_bonus/pan_events.o ./src_bonus/events.o $(EXTRA)
 CC=cc -Wall -Wextra -I ./$(MINILIBX) -ggdb
 FLAG_EXEC=-Lmlx_linux -lmlx_Linux -L./$(MINILIBX) -Imlx_linux -lXext -lX11 -lm -lz
-FLAG_OBJ=-Imlx_linux -O3
-
+FLAG_OBJ=-Imlx_linux -O3m
 MINILIBX=minilibx-linux
 GNL=gnl
 LIBFT=libft
 
-all: $(MINILIBX) $(LIBFT) $(GNL) $(NAME) 
+all: $(MINILIBX) $(LIBFT) $(GNL) $(NAME)
 
 $(MINILIBX):
 	git clone git@github.com:42Paris/minilibx-linux.git $(MINILIBX)
@@ -31,9 +29,11 @@ $(NAME): $(FILES)
 
 clean:
 	rm -f $(FILES)
+	rm -f $(BONUS_FILES)
 
 fclean: clean
 	rm -f $(NAME)
+	rm -f $(BONUS_NAME)
 	rm -rf $(MINILIBX)
 	rm -rf $(LIBFT)
 	rm -rf $(GNL)

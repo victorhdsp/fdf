@@ -6,7 +6,7 @@
 /*   By: vide-sou <vide-sou@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 08:02:47 by vide-sou          #+#    #+#             */
-/*   Updated: 2025/02/05 19:26:21 by vide-sou         ###   ########.fr       */
+/*   Updated: 2025/02/06 09:25:07 by vide-sou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,13 @@ static int	ft_close(t_section *section)
 	exit(0);
 }
 
+static int ft_handle_key(int keycode, t_section *section)
+{
+	if (keycode == 65307)
+		ft_close(section);
+	return (0);
+}
+
 int	main(int ac, char **av)
 {
 	t_section	section;
@@ -74,5 +81,6 @@ int	main(int ac, char **av)
 	section.per_pixel = ((section.width / section.column) / 2);
 	print_screen(&section);
 	mlx_hook(section.win, 17, 0, ft_close, &section);
+	mlx_hook(section.win, 2, 1L<<0, ft_handle_key, &section);
 	mlx_loop(section.mlx);
 }
