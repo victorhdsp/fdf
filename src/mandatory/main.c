@@ -6,7 +6,7 @@
 /*   By: vide-sou <vide-sou@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 08:02:47 by vide-sou          #+#    #+#             */
-/*   Updated: 2025/02/06 09:25:07 by vide-sou         ###   ########.fr       */
+/*   Updated: 2025/02/07 12:38:54 by vide-sou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	main(int ac, char **av)
 			&data.line_length, &data.endian);
 	section.data = &data;
 	get_all_map(av[1], &section);
-	section.per_pixel = ((section.width / section.column) / 2);
+	section.per_pixel = section.width / (section.column + section.row);
 	print_screen(&section);
 	mlx_hook(section.win, 17, 0, ft_close, &section);
 	mlx_hook(section.win, 2, 1L << 0, ft_handle_key, &section);
