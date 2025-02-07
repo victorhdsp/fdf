@@ -6,7 +6,7 @@
 /*   By: vide-sou <vide-sou@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 08:36:13 by vide-sou          #+#    #+#             */
-/*   Updated: 2025/02/07 11:39:40 by vide-sou         ###   ########.fr       */
+/*   Updated: 2025/02/07 12:53:49 by vide-sou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ typedef struct s_section
 	int				diff_x;
 	int				diff_y;
 	double			zoom;
-	double			angle;
+	double			persp;
 	t_map_position	*map;
 }					t_section;
 

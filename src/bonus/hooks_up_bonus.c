@@ -6,7 +6,7 @@
 /*   By: vide-sou <vide-sou@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 09:32:32 by vide-sou          #+#    #+#             */
-/*   Updated: 2025/02/07 11:01:28 by vide-sou         ###   ########.fr       */
+/*   Updated: 2025/02/07 13:02:55 by vide-sou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ static int	ft_translate(t_section *section, int x, int y)
 	return (1);
 }
 
-static int	ft_rotate(t_section *section, double angle)
+static int	ft_rotate(t_section *section, double persp)
 {
-	section->angle += angle;
-	if (section->angle <= 0)
-		section->angle = 0;
-	if (section->angle >= 0.523599)
-		section->angle = 0.523599;
+	section->persp += persp;
+	if (section->persp <= 0)
+		section->persp = 0;
+	if (section->persp >= 0.5)
+		section->persp = 0.5;
 	print_screen(section);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: vide-sou <vide-sou@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 08:02:47 by vide-sou          #+#    #+#             */
-/*   Updated: 2025/02/07 12:40:03 by vide-sou         ###   ########.fr       */
+/*   Updated: 2025/02/07 12:53:31 by vide-sou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	start_section(t_section *section)
 	section->diff_x = 0;
 	section->diff_y = 0;
 	section->zoom = 1;
-	section->angle = .3;
+	section->persp = .3;
 }
 
 int	main(int ac, char **av)
