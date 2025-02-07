@@ -6,7 +6,7 @@
 /*   By: vide-sou <vide-sou@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 08:36:00 by vide-sou          #+#    #+#             */
-/*   Updated: 2025/02/05 17:34:49 by vide-sou         ###   ########.fr       */
+/*   Updated: 2025/02/07 11:33:43 by vide-sou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_draw_pixel(t_section *section, int x, int y, int color)
 {
 	char	*dst;
 
-	if (x < 0 || y < 0 || x > section->width || y > section->height)
+	if (x < 0 || y < 0 || x >= section->width || y >= section->height)
 		return ;
 	dst = section->data->addr + (y * section->data->line_length + x
 			* (section->data->bits_per_pixel / 8));

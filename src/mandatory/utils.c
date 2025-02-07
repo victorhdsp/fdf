@@ -6,7 +6,7 @@
 /*   By: vide-sou <vide-sou@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 14:58:01 by vide-sou          #+#    #+#             */
-/*   Updated: 2025/01/27 09:47:36 by vide-sou         ###   ########.fr       */
+/*   Updated: 2025/02/07 11:32:17 by vide-sou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@ int	ft_htoi(char *value)
 	index = 0;
 	count = 0;
 	result = 0;
+	while (value[index])
+	{
+		value[index] = ft_toupper(value[index]);
+		index++;
+	}
+	index = 0;
 	while (value && value[count])
 	{
 		while (hex[index] && value[count] != hex[index])

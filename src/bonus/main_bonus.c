@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vide-sou <vide-sou@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 08:02:47 by vide-sou          #+#    #+#             */
-/*   Updated: 2025/02/06 09:25:07 by vide-sou         ###   ########.fr       */
+/*   Updated: 2025/02/07 11:32:36 by vide-sou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_bonus.h"
 
 void	clear_screen(t_section *section)
 {
@@ -41,21 +41,17 @@ void	print_screen(t_section *section)
 		0);
 }
 
-static int	ft_close(t_section *section)
+static void	start_section(t_section *section)
 {
-	mlx_destroy_image(section->mlx, section->data->img);
-	mlx_destroy_window(section->mlx, section->win);
-	mlx_destroy_display(section->mlx);
-	free(section->map);
-	free(section->mlx);
-	exit(0);
-}
-
-static int ft_handle_key(int keycode, t_section *section)
-{
-	if (keycode == 65307)
-		ft_close(section);
-	return (0);
+	section->width = WIDTH;
+	section->height = HEIGHT;
+	section->column = 0;
+	section->row = 0;
+	section->map = NULL;
+	section->diff_x = 0;
+	section->diff_y = 0;
+	section->zoom = 1;
+	section->angle = .45;
 }
 
 int	main(int ac, char **av)
@@ -66,10 +62,7 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		exit(-1);
 	section.mlx = mlx_init();
-	section.width = WIDTH;
-	section.height = HEIGHT;
-	section.column = 0;
-	section.row = 0;
+	start_section(&section);
 	mlx_get_screen_size(section.mlx, &section.width, &section.height);
 	section.win = mlx_new_window(section.mlx, section.width, section.height,
 			"fdf");
@@ -81,6 +74,6 @@ int	main(int ac, char **av)
 	section.per_pixel = ((section.width / section.column) / 2);
 	print_screen(&section);
 	mlx_hook(section.win, 17, 0, ft_close, &section);
-	mlx_hook(section.win, 2, 1L<<0, ft_handle_key, &section);
+	mlx_hook(section.win, 2, 1L << 0, ft_handle_key_up, &section);
 	mlx_loop(section.mlx);
 }
