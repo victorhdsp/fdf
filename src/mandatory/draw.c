@@ -6,7 +6,7 @@
 /*   By: vide-sou <vide-sou@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 08:36:00 by vide-sou          #+#    #+#             */
-/*   Updated: 2025/02/07 11:33:43 by vide-sou         ###   ########.fr       */
+/*   Updated: 2025/02/07 14:05:56 by vide-sou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,20 +55,20 @@ void	ft_draw_line(t_section *section, t_pixel_source *px_ini,
 	double	delta_y;
 	int		color;
 	int		index;
-	int		step;
+	int		diff;
 
 	delta_x = px_end->x - px_ini->x;
 	delta_y = px_end->y - px_ini->y;
 	if (fabs(delta_x) >= fabs(delta_y))
-		step = fabs(delta_x);
+		diff = fabs(delta_x);
 	else
-		step = fabs(delta_y);
-	delta_x = delta_x / step;
-	delta_y = delta_y / step;
+		diff = fabs(delta_y);
+	delta_x = delta_x / diff;
+	delta_y = delta_y / diff;
 	index = 0;
-	while (index < step)
+	while (index < diff)
 	{
-		color = ft_create_color(px_ini->color, px_end->color, step, index);
+		color = ft_create_color(px_ini->color, px_end->color, diff, index);
 		ft_draw_pixel(section, px_ini->x, px_ini->y, color);
 		px_ini->x += delta_x;
 		px_ini->y += delta_y;

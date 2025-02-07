@@ -6,11 +6,37 @@
 /*   By: vide-sou <vide-sou@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 08:02:47 by vide-sou          #+#    #+#             */
-/*   Updated: 2025/02/07 12:53:31 by vide-sou         ###   ########.fr       */
+/*   Updated: 2025/02/07 16:17:33 by vide-sou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf_bonus.h"
+
+static void	start_section(t_section *section)
+{
+	section->width = WIDTH;
+	section->height = HEIGHT;
+	section->column = 0;
+	section->row = 0;
+	section->map = NULL;
+	section->diff_x = 0;
+	section->diff_y = 0;
+	section->zoom = 1;
+	section->persp = 0.5236;
+	section->angle = 0.7854;
+}
+
+static void	start_menu(t_section *section)
+{
+	mlx_string_put(section->mlx, section->win, 10, 10 + 10, 0xFFFFFF,
+		"Move with: AWSD");
+	mlx_string_put(section->mlx, section->win, 10, 20 + 10 + 5, 0xFFFFFF,
+		"Rotate with: QR");
+	mlx_string_put(section->mlx, section->win, 10, 35 + 10 + 5, 0xFFFFFF,
+		"Zoom with: +-");
+	mlx_string_put(section->mlx, section->win, 10, 50 + 10 + 5, 0xFFFFFF,
+		"Persp with: P");
+}
 
 void	clear_screen(t_section *section)
 {
@@ -39,19 +65,7 @@ void	print_screen(t_section *section)
 	ft_draw_map(section);
 	mlx_put_image_to_window(section->mlx, section->win, section->data->img, 0,
 		0);
-}
-
-static void	start_section(t_section *section)
-{
-	section->width = WIDTH;
-	section->height = HEIGHT;
-	section->column = 0;
-	section->row = 0;
-	section->map = NULL;
-	section->diff_x = 0;
-	section->diff_y = 0;
-	section->zoom = 1;
-	section->persp = .3;
+	start_menu(section);
 }
 
 int	main(int ac, char **av)

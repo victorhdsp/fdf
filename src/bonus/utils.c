@@ -6,7 +6,7 @@
 /*   By: vide-sou <vide-sou@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 14:58:01 by vide-sou          #+#    #+#             */
-/*   Updated: 2025/02/07 11:33:27 by vide-sou         ###   ########.fr       */
+/*   Updated: 2025/02/07 16:17:19 by vide-sou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,14 @@ char	*ft_join_with_space(char *s1, char *s2)
 	else
 		result = ft_strjoin(s1, s2);
 	return (result);
+}
+
+int	ft_close(t_section *section)
+{
+	mlx_destroy_image(section->mlx, section->data->img);
+	mlx_destroy_window(section->mlx, section->win);
+	mlx_destroy_display(section->mlx);
+	free(section->map);
+	free(section->mlx);
+	exit(0);
 }

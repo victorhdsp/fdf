@@ -6,22 +6,12 @@
 /*   By: vide-sou <vide-sou@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 09:32:32 by vide-sou          #+#    #+#             */
-/*   Updated: 2025/02/07 13:02:55 by vide-sou         ###   ########.fr       */
+/*   Updated: 2025/02/07 16:17:15 by vide-sou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf_bonus.h"
 #include <X11/keysym.h>
-
-int	ft_close(t_section *section)
-{
-	mlx_destroy_image(section->mlx, section->data->img);
-	mlx_destroy_window(section->mlx, section->win);
-	mlx_destroy_display(section->mlx);
-	free(section->map);
-	free(section->mlx);
-	exit(0);
-}
 
 static int	ft_zoom(t_section *section, double value)
 {
@@ -40,13 +30,19 @@ static int	ft_translate(t_section *section, int x, int y)
 	return (1);
 }
 
-static int	ft_rotate(t_section *section, double persp)
+static int	ft_rotate(t_section *section, double angle)
 {
-	section->persp += persp;
-	if (section->persp <= 0)
+	section->angle += angle;
+	print_screen(section);
+	return (1);
+}
+
+static int	ft_persp(t_section *section)
+{
+	if (section->persp == 0)
+		section->persp = 0.5236;
+	else
 		section->persp = 0;
-	if (section->persp >= 0.5)
-		section->persp = 0.5;
 	print_screen(section);
 	return (1);
 }
@@ -57,7 +53,7 @@ int	ft_handle_key_up(int keycode, t_section *section)
 		ft_close(section);
 	if (keycode == XK_KP_Subtract || keycode == XK_minus)
 		ft_zoom(section, -.05);
-	if (keycode == XK_KP_Add || keycode == XK_plus)
+	if (keycode == XK_KP_Add || keycode == XK_equal)
 		ft_zoom(section, .05);
 	if (keycode == XK_Left || keycode == XK_a)
 		ft_translate(section, -10, 0);
@@ -71,5 +67,7 @@ int	ft_handle_key_up(int keycode, t_section *section)
 		ft_rotate(section, -.1);
 	if (keycode == XK_KP_Multiply || keycode == XK_e)
 		ft_rotate(section, .1);
+	if (keycode == XK_p)
+		ft_persp(section);
 	return (0);
 }
