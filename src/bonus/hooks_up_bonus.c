@@ -6,7 +6,7 @@
 /*   By: vide-sou <vide-sou@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 09:32:32 by vide-sou          #+#    #+#             */
-/*   Updated: 2025/02/07 16:17:15 by vide-sou         ###   ########.fr       */
+/*   Updated: 2025/02/08 11:43:42 by vide-sou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ static int	ft_rotate(t_section *section, double angle)
 
 static int	ft_persp(t_section *section)
 {
-	if (section->persp == 0)
-		section->persp = 0.5236;
+	if (section->is_isometric)
+		section->is_isometric = 0;
 	else
-		section->persp = 0;
+		section->is_isometric = 1;
 	print_screen(section);
 	return (1);
 }
