@@ -6,7 +6,7 @@
 /*   By: vide-sou <vide-sou@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 08:02:47 by vide-sou          #+#    #+#             */
-/*   Updated: 2025/02/08 10:12:58 by vide-sou         ###   ########.fr       */
+/*   Updated: 2025/02/08 11:41:13 by vide-sou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void	start_section(t_section *section)
 	section->zoom = 1;
 	section->persp = 0.5236;
 	section->angle = 0.7854;
+	section->is_isometric = 1;
 }
 
 static void	start_menu(t_section *section)
