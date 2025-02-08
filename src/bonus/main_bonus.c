@@ -88,6 +88,6 @@ int	main(int ac, char **av)
 	section.per_pixel = section.width / (section.column + section.row);
 	print_screen(&section);
 	mlx_hook(section.win, 17, 0, ft_close, &section);
-	mlx_hook(section.win, 3, 1L<<1, ft_handle_key_up, &section);
+	mlx_hook(section.win, 3, 1L << 1, ft_handle_key_up, &section);
 	mlx_loop(section.mlx);
 }
