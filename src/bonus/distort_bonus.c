@@ -6,7 +6,7 @@
 /*   By: vide-sou <vide-sou@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 08:36:00 by vide-sou          #+#    #+#             */
-/*   Updated: 2025/02/08 11:41:51 by vide-sou         ###   ########.fr       */
+/*   Updated: 2025/02/08 11:42:47 by vide-sou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,9 @@ void	ft_isometric(t_section *section, double *x, double *y, double z)
 
 	inner_x = *x;
 	inner_y = *y;
-	tmp = ((inner_x) * cos(section->angle)) - ((inner_y)
-			* sin(section->angle));
+	tmp = ((inner_x) * cos(section->angle)) - ((inner_y) * sin(section->angle));
 	*x = ft_per_pixel(tmp * cos(section->persp), section);
-	tmp = ((inner_x) * sin(section->angle)) + ((inner_y)
-			* cos(section->angle));
+	tmp = ((inner_x) * sin(section->angle)) + ((inner_y) * cos(section->angle));
 	*y = ft_per_pixel(tmp * sin(section->persp) - z, section);
 }
 
@@ -38,16 +36,16 @@ void	ft_conic(t_section *section, double *x, double *y, double z)
 	double	tmp;
 	double	inner_x;
 	double	inner_y;
-	double 	dist;
+	double	dist;
 
 	inner_x = *x;
 	inner_y = *y;
 	dist = 1.5;
 	tmp = (((dist * inner_x) * cos(section->angle)) - ((dist * inner_y)
-			* sin(section->angle))) / (z + dist);
+				* sin(section->angle))) / (z + dist);
 	*x = ft_per_pixel(tmp * cos(section->persp), section);
 	tmp = (((dist * inner_x) * sin(section->angle)) + ((dist * inner_y)
-			* cos(section->angle))) / (z + dist);
+				* cos(section->angle))) / (z + dist);
 	*y = ft_per_pixel(tmp * sin(section->persp) - z, section);
 }
 
