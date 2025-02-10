@@ -6,7 +6,7 @@
 /*   By: vide-sou <vide-sou@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 08:36:13 by vide-sou          #+#    #+#             */
-/*   Updated: 2025/02/05 17:24:06 by vide-sou         ###   ########.fr       */
+/*   Updated: 2025/02/10 13:53:19 by vide-sou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,6 @@ void				ft_draw_map(t_section *section);
 t_pixel_source		ft_distort_pixel(int x, int y, t_section *section);
 void				print_screen(t_section *section);
 void				clear_screen(t_section *section);
+int					ft_close(t_section *section);
 
 #endif

@@ -6,11 +6,24 @@
 /*   By: vide-sou <vide-sou@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 08:02:47 by vide-sou          #+#    #+#             */
-/*   Updated: 2025/02/07 12:38:54 by vide-sou         ###   ########.fr       */
+/*   Updated: 2025/02/10 14:21:27 by vide-sou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+static void	start_section(t_section *section)
+{
+	section->mlx = NULL;
+	section->win = NULL;
+	section->data = NULL;
+	section->width = WIDTH;
+	section->height = HEIGHT;
+	section->per_pixel = 0;
+	section->column = 0;
+	section->row = 0;
+	section->map = NULL;
+}
 
 void	clear_screen(t_section *section)
 {
@@ -41,16 +54,6 @@ void	print_screen(t_section *section)
 		0);
 }
 
-static int	ft_close(t_section *section)
-{
-	mlx_destroy_image(section->mlx, section->data->img);
-	mlx_destroy_window(section->mlx, section->win);
-	mlx_destroy_display(section->mlx);
-	free(section->map);
-	free(section->mlx);
-	exit(0);
-}
-
 static int	ft_handle_key(int keycode, t_section *section)
 {
 	if (keycode == 65307)
@@ -65,20 +68,21 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 		exit(-1);
+	start_section(&section);
 	section.mlx = mlx_init();
-	section.width = WIDTH;
-	section.height = HEIGHT;
-	section.column = 0;
-	section.row = 0;
+	if (!section.mlx)
+		ft_close(&section);
 	mlx_get_screen_size(section.mlx, &section.width, &section.height);
 	section.win = mlx_new_window(section.mlx, section.width, section.height,
 			"fdf");
+	if (!section.win)
+		ft_close(&section);
 	data.img = mlx_new_image(section.mlx, section.width, section.height);
 	data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel,
 			&data.line_length, &data.endian);
 	section.data = &data;
 	get_all_map(av[1], &section);
-	section.per_pixel = section.width / (section.column + section.row);
+	section.per_pixel = (section.height / section.row) * .75;
 	print_screen(&section);
 	mlx_hook(section.win, 17, 0, ft_close, &section);
 	mlx_hook(section.win, 2, 1L << 0, ft_handle_key, &section);
