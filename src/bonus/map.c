@@ -6,7 +6,7 @@
 /*   By: vide-sou <vide-sou@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 09:44:30 by vide-sou          #+#    #+#             */
-/*   Updated: 2025/02/06 17:02:17 by vide-sou         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:33:52 by vide-sou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ static void	get_rows_map(char *path, t_section *section)
 
 	index = 0;
 	fd = open(path, O_RDONLY);
+	if (fd < 0)
+		ft_close(section);
 	line = get_next_line(fd);
 	while (line[index])
 	{
@@ -89,6 +91,8 @@ void	get_all_map(char *path, t_section *section)
 	index = 0;
 	get_rows_map(path, section);
 	fd = open(path, O_RDONLY);
+	if (fd < 0)
+		ft_close(section);
 	line_map = get_next_line(fd);
 	section->map = ft_calloc((section->column + 1) * section->row,
 			sizeof(t_map_position));
