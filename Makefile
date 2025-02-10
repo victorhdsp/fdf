@@ -26,13 +26,13 @@ $(LIBFT):
 	make -C ./$(LIBFT)
 
 $(NAME): $(FILES)
-	$(CC) $^ ./libft/libft.a $(FLAG_EXEC) -o $(NAME)
+	$(CC) $^ ./libft/libft.a $(FLAG_EXEC) -o $(NAME) -D BUFFER_SIZE=1000
 
 $(BONUS_NAME): $(BONUS_FILES)
-	$(CC) $^ ./libft/libft.a $(FLAG_EXEC) -o $(BONUS_NAME)
+	$(CC) $^ ./libft/libft.a $(FLAG_EXEC) -o $(BONUS_NAME) -D BUFFER_SIZE=1000
 
 .o: .c
-	$(CC) $(FLAG_OBJ) -c $< -o $@
+	$(CC) $(FLAG_OBJ) -c $< -o $@ -D BUFFER_SIZE=1000
 
 clean:
 	rm -f $(FILES)

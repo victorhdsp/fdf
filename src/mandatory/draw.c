@@ -6,7 +6,7 @@
 /*   By: vide-sou <vide-sou@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 08:36:00 by vide-sou          #+#    #+#             */
-/*   Updated: 2025/02/07 14:05:56 by vide-sou         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:25:37 by vide-sou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,27 +51,27 @@ void	ft_draw_pixel(t_section *section, int x, int y, int color)
 void	ft_draw_line(t_section *section, t_pixel_source *px_ini,
 		t_pixel_source *px_end)
 {
-	double	delta_x;
-	double	delta_y;
+	double	diff_x;
+	double	diff_y;
 	int		color;
 	int		index;
 	int		diff;
 
-	delta_x = px_end->x - px_ini->x;
-	delta_y = px_end->y - px_ini->y;
-	if (fabs(delta_x) >= fabs(delta_y))
-		diff = fabs(delta_x);
+	diff_x = px_end->x - px_ini->x;
+	diff_y = px_end->y - px_ini->y;
+	if (fabs(diff_x) >= fabs(diff_y))
+		diff = fabs(diff_x);
 	else
-		diff = fabs(delta_y);
-	delta_x = delta_x / diff;
-	delta_y = delta_y / diff;
+		diff = fabs(diff_y);
+	diff_x = diff_x / diff;
+	diff_y = diff_y / diff;
 	index = 0;
 	while (index < diff)
 	{
 		color = ft_create_color(px_ini->color, px_end->color, diff, index);
 		ft_draw_pixel(section, px_ini->x, px_ini->y, color);
-		px_ini->x += delta_x;
-		px_ini->y += delta_y;
+		px_ini->x += diff_x;
+		px_ini->y += diff_y;
 		index++;
 	}
 }

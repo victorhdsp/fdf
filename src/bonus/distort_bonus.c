@@ -6,7 +6,7 @@
 /*   By: vide-sou <vide-sou@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 08:36:00 by vide-sou          #+#    #+#             */
-/*   Updated: 2025/02/10 14:36:01 by vide-sou         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:27:55 by vide-sou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_isometric(t_section *section, double *x, double *y, double z)
 	tmp = ((inner_x) * cos(section->angle)) - ((inner_y) * sin(section->angle));
 	*x = ft_per_pixel(tmp * cos(section->persp), section);
 	tmp = ((inner_x) * sin(section->angle)) + ((inner_y) * cos(section->angle));
-	*y = ft_per_pixel(tmp * sin(section->persp) - (z * .2), section);
+	*y = ft_per_pixel(tmp * sin(section->persp) - (z * .4), section);
 }
 
 void	ft_conic(t_section *section, double *x, double *y, double z)
