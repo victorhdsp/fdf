@@ -6,7 +6,7 @@
 /*   By: vide-sou <vide-sou@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 08:36:00 by vide-sou          #+#    #+#             */
-/*   Updated: 2025/02/08 10:32:14 by vide-sou         ###   ########.fr       */
+/*   Updated: 2025/02/10 08:15:05 by vide-sou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_pixel_source	ft_distort_pixel(int x, int y, t_section *section)
 	double	tmp;
 
 	index = x + (y * (section->column + 1));
-	inner_z = section->map[index].z;
+	inner_z = section->map[index].z * .75;
 	ft_centralize(&inner_x, &inner_y, inner_z, section);
 	tmp = (x * cos(0.7854)) - (y * sin(0.7854));
 	inner_x += ft_per_pixel(tmp * cos(0.5236), section);
